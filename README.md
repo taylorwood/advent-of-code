@@ -5,6 +5,7 @@ Solutions to [Advent of Code](https://adventofcode.com) challenges.
 ## 2017
 
 - [Day One](https://github.com/taylorwood/advent-of-code/tree/master/src/advent_of_code/2017/1.clj)
+- [Day Two](https://github.com/taylorwood/advent-of-code/tree/master/src/advent_of_code/2017/2.clj)
 
 ## 2016
 
