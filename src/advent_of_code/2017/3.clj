@@ -31,3 +31,51 @@
          (Math/abs (- mid-index corner-dist))))))           ;; how many steps off-center (X *or* Y axis) we are
 
 (spiral-manhattan-dist 347991)                              ;; solve part one
+
+
+(def directions (cycle [:right :up :left :down]))
+
+(def translations
+  {:right [inc identity]
+   :up    [identity inc]
+   :left  [dec identity]
+   :down  [identity dec]})
+
+(defn translate [pos dir]
+  (let [trans (get translations dir)]
+    (mapv #(%1 %2) trans pos)))
+
+(def neighbor-translations
+  [:right :up :left :down
+   [:right :up] [:right :down]
+   [:left :up] [:left :down]])
+
+(defn neighbors [pos]
+  (for [trans neighbor-translations]
+    (if (coll? trans)
+      (reduce translate pos trans)
+      (translate pos trans))))
+
+(defn sum-neighbors [spiral pos]
+  (reduce (fn [sum elem]
+            (if-let [match (first (filter #(= % elem) spiral))]
+              (+ sum (:value (meta match)))
+              sum))
+          0
+          (neighbors pos)))
+
+;; solve part two
+;; nothing special about this... cells are tuples of X/Y coords with value metadata
+;; spiral works as a list or a set with cons, doesn't really matter for this input
+(loop [spiral #{^{:value 1} [0 0]}
+       dirs directions]
+  (let [last-pos (first spiral)
+        curr-pos (translate last-pos (first dirs))
+        neighbor-sum (sum-neighbors spiral curr-pos)
+        ;; these calcs are irrelevant in terminal case but it reads nicer as one `let` :)
+        next-pos (translate curr-pos (second dirs))
+        can-turn? (not-any? #{next-pos} spiral)
+        spiral (cons (with-meta curr-pos {:value neighbor-sum}) spiral)]
+    (if (< 347991 neighbor-sum)
+      neighbor-sum
+      (recur spiral (if can-turn? (rest dirs) dirs)))))
