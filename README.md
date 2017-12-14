@@ -8,6 +8,7 @@ Solutions to [Advent of Code](https://adventofcode.com) challenges.
 - [Day Two](https://github.com/taylorwood/advent-of-code/tree/master/src/advent_of_code/2017/2.clj)
 - [Day Three](https://github.com/taylorwood/advent-of-code/tree/master/src/advent_of_code/2017/3.clj)
 - [Day Four](https://github.com/taylorwood/advent-of-code/tree/master/src/advent_of_code/2017/4.clj)
+- [Day Five](https://github.com/taylorwood/advent-of-code/tree/master/src/advent_of_code/2017/5.clj)
 
 ## 2016
 
