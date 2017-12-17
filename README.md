@@ -1,3 +1,5 @@
+<img src="doc/img/santa.jpg" align="right" width="300" />
+
 # Advent of Code
 
 Solutions to [Advent of Code](https://adventofcode.com) challenges.
