@@ -1,4 +1,4 @@
-<img src="doc/img/santa.jpg" align="right" width="300" />
+<img src="doc/img/santa.jpg" align="right" width="450" />
 
 # Advent of Code
 
