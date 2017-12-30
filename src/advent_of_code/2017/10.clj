@@ -34,16 +34,18 @@
      (apply *))
 
 (def char-inputs
-  (concat (map (comp int char) raw-input)
-          [17, 31, 73, 47, 23]))
+  (map (comp int char) raw-input))
+
+(defn knot-hash-2 [s]
+  (let [input (concat s [17, 31, 73, 47, 23])]
+    (->> (cycle input)
+         (take (* (count input) 64))
+         (knot-hash)
+         (:hash)
+         (partition 16)
+         (map #(apply bit-xor %))
+         (mapcat #(format "%02x" %))
+         (apply str))))
 
 ;; solve part two
-(->> char-inputs
-     (cycle)
-     (take (* (count char-inputs) 64))
-     (knot-hash)
-     (:hash)
-     (partition 16)
-     (map #(apply bit-xor %))
-     (mapcat #(format "%02x" %))
-     (apply str))
+(knot-hash-2 char-inputs)
