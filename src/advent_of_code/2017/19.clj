@@ -31,7 +31,7 @@
           :when (or (= nextc validc) (is-letter? nextc))]
       [bearing nextp])))
 
-(def complement-bearing {:n :s, :s :n, :e :w, :w :e})
+(def reverse-bearing {:n :s, :s :n, :e :w, :w :e})
 
 (def steps (atom 0)) ;; this is an incredibly lazy hack for pt.2 but will anyone ever read this code?!
 
@@ -44,7 +44,7 @@
       (cond
         (= \+ curr-char) ;; turn at intersections
         (let [[next-bearing next-pos] (->> (intersection-bearings diagram curr-pos)
-                                           (remove #(= (first %) (complement-bearing bearing)))
+                                           (remove #(= (first %) (reverse-bearing bearing)))
                                            (first))] ;; first valid, forward path leaving intersection
           (recur next-pos next-bearing visited))
 
