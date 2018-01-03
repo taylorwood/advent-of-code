@@ -28,6 +28,7 @@ Solutions to [Advent of Code](https://adventofcode.com) challenges.
 - [Day Twenty](https://github.com/taylorwood/advent-of-code/tree/master/src/advent_of_code/2017/20.clj)
 - [Day Twenty One](https://github.com/taylorwood/advent-of-code/tree/master/src/advent_of_code/2017/21.clj)
 - [Day Twenty Two](https://github.com/taylorwood/advent-of-code/tree/master/src/advent_of_code/2017/22.clj)
+- [Day Twenty Three](https://github.com/taylorwood/advent-of-code/tree/master/src/advent_of_code/2017/23.clj)
 
 ## 2016
 

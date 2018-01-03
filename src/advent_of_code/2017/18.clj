@@ -1,4 +1,5 @@
 (ns advent-of-code.2017.18
+  (:refer-clojure :exclude [set mod])
   (:require [clojure.java.io :as io]
             [clojure.string :as cs]))
 
