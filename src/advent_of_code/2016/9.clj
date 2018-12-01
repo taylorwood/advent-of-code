@@ -24,18 +24,18 @@
                           (parse-cmd (apply str cmd-stack)))
                 s (if (and cc rl) ;; apply parsed cmd
                     (assoc st :state     :content
-                              :decoded   (+ decoded
-                                            (if recursive ;; pre-process inner cmds
-                                              (* rl (decompress (->> (drop 1 in) ;; hack :)
-                                                                     (take cc)) recursive))
-                                              (* rl cc)))
-                              :cmd-stack [])
+                           :decoded   (+ decoded
+                                         (if recursive ;; pre-process inner cmds
+                                           (* rl (decompress (->> (drop 1 in) ;; hack :)
+                                                                  (take cc)) recursive))
+                                           (* rl cc)))
+                           :cmd-stack [])
                     (assoc st :state     p ;; else append content char-by-char
-                              :decoded   (if (= :content p)
-                                           (inc decoded)
-                                           decoded)
-                              :cmd-stack (if (not= :content p)
-                                           (conj (or cmd-stack []) c))))
+                           :decoded   (if (= :content p)
+                                        (inc decoded)
+                                        decoded)
+                           :cmd-stack (if (not= :content p)
+                                        (conj (or cmd-stack []) c))))
                 rem (if cc
                       (drop cc (rest in))
                       (rest in))]

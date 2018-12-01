@@ -22,17 +22,17 @@
   [coll]
   (->> (combinations (sort #(compare %2 %1) coll) 2)
        (sequence
-         (comp
-           (map (partial apply /))
-           (filter integer?)))))
+        (comp
+         (map (partial apply /))
+         (filter integer?)))))
 
 (->> rows                                                   ;; solve part two
      (map (comp first integer-quotients))
      (reduce +))
 
 (transduce                                                  ;; or solve part two with transduce
-  (comp
-    (map integer-quotients)
-    (map first))
-  +
-  rows)
+ (comp
+  (map integer-quotients)
+  (map first))
+ +
+ rows)

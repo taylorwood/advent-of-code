@@ -22,17 +22,17 @@
 (defn flip-horiz [matrix] (mapv (comp vec reverse) matrix))
 (defn permutations [matrix]
   (distinct ;; HACK a few flips are redundant but I'm short on time!
-    (concat
-      (take 4 (iterate rotate-right matrix))
-      (map flip-horiz (take 4 (iterate rotate-right matrix)))
-      (map flip-vert (take 4 (iterate rotate-right matrix))))))
+   (concat
+    (take 4 (iterate rotate-right matrix))
+    (map flip-horiz (take 4 (iterate rotate-right matrix)))
+    (map flip-vert (take 4 (iterate rotate-right matrix))))))
 
 (def input->output
   (memoize ;; HACK make faster
-    (fn [matrix]
-      (->> pattern-rules
-           (filter #(some #{(:input %)} (permutations matrix)))
-           (first)))))
+   (fn [matrix]
+     (->> pattern-rules
+          (filter #(some #{(:input %)} (permutations matrix)))
+          (first)))))
 
 (defn sub-matrix [matrix row col size]
   (->> (drop row matrix)

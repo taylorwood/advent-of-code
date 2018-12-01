@@ -42,12 +42,12 @@
   "Returns the length of the first unique sequence in coll."
   [coll]
   (reduce
-    (fn [[i seen] elem]
-      (if (seen elem)
-        (reduced i)
-        [(inc i) (conj seen elem)]))
-    [0 #{}]
-    coll))
+   (fn [[i seen] elem]
+     (if (seen elem)
+       (reduced i)
+       [(inc i) (conj seen elem)]))
+   [0 #{}]
+   coll))
 
 ;; solve part one
 (first-unique-seq-count (iterate redistribute banks))

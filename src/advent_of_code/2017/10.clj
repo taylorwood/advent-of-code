@@ -19,12 +19,12 @@
 
 (defn knot-hash [s]
   (reduce
-    (fn [{:keys [pos skip hash]} len]
-      {:pos  (+ pos len skip)
-       :skip (inc skip)
-       :hash (twist hash pos len)})
-    {:pos 0 :skip 0 :hash (vec (range 256))}
-    s))
+   (fn [{:keys [pos skip hash]} len]
+     {:pos  (+ pos len skip)
+      :skip (inc skip)
+      :hash (twist hash pos len)})
+   {:pos 0 :skip 0 :hash (vec (range 256))}
+   s))
 
 ;; solve part one
 (->> inputs

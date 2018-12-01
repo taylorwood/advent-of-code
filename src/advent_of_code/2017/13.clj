@@ -49,19 +49,19 @@
 
 (def layer-lengths
   (into {}
-    (for [[depth range'] layers
-          :let [len (- (* 2 range') 2)]]
-      [depth len])))
+        (for [[depth range'] layers
+              :let [len (- (* 2 range') 2)]]
+          [depth len])))
 
 (defn perfect?
   "Returns true if a perfect run is possible for a given delay."
   [delay]
   (every?
-    (fn [i]
-      (if-let [range-len (layer-lengths i)]
-        (not= 0 (mod (+ i delay) range-len))
-        true))
-    layer-indices))
+   (fn [i]
+     (if-let [range-len (layer-lengths i)]
+       (not= 0 (mod (+ i delay) range-len))
+       true))
+   layer-indices))
 
 ;; solve part two
 (first (filter perfect? (range)))

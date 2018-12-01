@@ -38,10 +38,10 @@
 
 ;; solve part one
 (apply str
-  (reduce
-    #(%2 %1)
-    programs
-    steps))
+       (reduce
+        #(%2 %1)
+        programs
+        steps))
 
 ;; After admitting defeat w/brute force I knew I had to
 ;; be missing a ~key observation~. Given the nature of the
@@ -58,19 +58,19 @@
 
 (def cycle-len
   (->> (reductions
-         #(%2 %1)
-         programs
-         (cycle steps))
+        #(%2 %1)
+        programs
+        (cycle steps))
        (take-while-distinct)
        (count)))
 
 ;; solve part two
 (apply str
-  (reduce
-    #(%2 %1)
-    programs
+       (reduce
+        #(%2 %1)
+        programs
     ;; problem is now tractable since we know the cycle length
     ;; and can skip (almost all the way) to the end
-    (->> (cycle steps)
-         (take (* (rem 1000000000 cycle-len)
-                  (count steps))))))
+        (->> (cycle steps)
+             (take (* (rem 1000000000 cycle-len)
+                      (count steps))))))

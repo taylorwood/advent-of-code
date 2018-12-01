@@ -10,9 +10,9 @@
 
 (defn nth* [coll i & is]
   (reduce
-    #(nth %1 %2 nil)
-    (nth coll i nil)
-    is))
+   #(nth %1 %2 nil)
+   (nth coll i nil)
+   is))
 
 (defn next-pos [[row col] bearing]
   (case bearing

@@ -45,7 +45,7 @@
 (def crazy-numpad [[ø ø 1 ø ø]
                    [ø 2 3 4 ø]
                    [5 6 7 8 9]
-                   [ø\A\B\C ø]
-                   [ø ø\D ø ø]])
+                   [ø \A \B \C ø]
+                   [ø ø \D ø ø]])
 
 (solve crazy-numpad {:x 2 :y 2})

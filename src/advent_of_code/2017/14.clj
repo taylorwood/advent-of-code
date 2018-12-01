@@ -32,23 +32,23 @@
 
 (def occupied-offsets
   (sequence
-    (comp
-      (map-indexed (fn [i row]
-                     (let [lit-cols (keep-indexed #(when (= 1 %2) %1) row)]
-                       (map vector (repeat i) lit-cols))))
-      (mapcat identity))
-    row-hashes))
+   (comp
+    (map-indexed (fn [i row]
+                   (let [lit-cols (keep-indexed #(when (= 1 %2) %1) row)]
+                     (map vector (repeat i) lit-cols))))
+    (mapcat identity))
+   row-hashes))
 
 (def regions
   (reduce
-    (fn [acc [row col]]
-      (let [adj-offs (set (adjacent-offsets row col))
-            adj-regions (filter #(some adj-offs %) acc)
-            new-region (conj (apply union adj-regions) [row col])]
-        (-> (apply disj acc adj-regions) ;; remove old adjacent regions
-            (conj new-region))))         ;; add new region
-    #{}
-    occupied-offsets))
+   (fn [acc [row col]]
+     (let [adj-offs (set (adjacent-offsets row col))
+           adj-regions (filter #(some adj-offs %) acc)
+           new-region (conj (apply union adj-regions) [row col])]
+       (-> (apply disj acc adj-regions) ;; remove old adjacent regions
+           (conj new-region))))         ;; add new region
+   #{}
+   occupied-offsets))
 
 ;; solve part two
 (count regions)

@@ -9,9 +9,9 @@
   (let [[name weight] (rest (re-find #"(\w+)\s\((\d+)\)" l))
         kids (when-let [adj-text (re-find #".+->(.+)" l)]
                (as-> adj-text $
-                     (last $)
-                     (cs/split $ #",")
-                     (map cs/trim $)))]
+                 (last $)
+                 (cs/split $ #",")
+                 (map cs/trim $)))]
     {:name     name
      :weight   (Integer/parseInt weight)
      :children kids}))
@@ -41,19 +41,19 @@
 (def tree
   "Recursive representation of input graph, with child weight sums at each branch."
   (walk/postwalk
-    (fn [v]
-      (cond
-        (and (map? v)
-             (seq (:children v)))
-        (let [{:keys [weight children]} v
-              child-weights (map (some-fn :sum :weight) children)
-              child-weight-sum (reduce + child-weights)
-              balanced? (every? #(= % (first child-weights))
-                                child-weights)]
-          (assoc v :sum (+ weight child-weight-sum)
-                   :balanced? balanced?))
-        :else v))
-    (->tree graph root)))
+   (fn [v]
+     (cond
+       (and (map? v)
+            (seq (:children v)))
+       (let [{:keys [weight children]} v
+             child-weights (map (some-fn :sum :weight) children)
+             child-weight-sum (reduce + child-weights)
+             balanced? (every? #(= % (first child-weights))
+                               child-weights)]
+         (assoc v :sum (+ weight child-weight-sum)
+                :balanced? balanced?))
+       :else v))
+   (->tree graph root)))
 
 ;; find the *deepest* off-balance map
 (->> tree

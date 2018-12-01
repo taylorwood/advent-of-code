@@ -11,9 +11,9 @@
 
 (defn set [registers x y] (inc-ip (assoc registers x (reg-val registers y))))
 (defn mul [registers x y] (inc-ip
-                            (-> registers
-                                (update x #(* (or % 0) (reg-val registers y)))
-                                (update :muls (fnil inc 0)))))
+                           (-> registers
+                               (update x #(* (or % 0) (reg-val registers y)))
+                               (update :muls (fnil inc 0)))))
 (defn sub [registers x y] (inc-ip (update registers x #(- (or % 0) (reg-val registers y)))))
 (defn jnz [registers x y]
   (if-not (zero? (reg-val registers x))
