@@ -28,3 +28,12 @@
        (reductions +)
        (drop-while #(apply not= (swap-vals! seen conj %)))
        (first)))
+
+;; solve part two w/o mutability
+(->> (cycle values)
+     (reductions +)
+     (reduce (fn [seen n]
+               (if (seen n)
+                 (reduced n)
+                 (conj seen n)))
+             #{}))
