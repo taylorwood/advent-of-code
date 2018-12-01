@@ -4,6 +4,10 @@
 
 Solutions to [Advent of Code](https://adventofcode.com) challenges.
 
+## 2018
+
+- [Day One](src/advent_of_code/2018/1.clj)
+
 ## 2017
 
 - [Day One](https://github.com/taylorwood/advent-of-code/tree/master/src/advent_of_code/2017/1.clj)
