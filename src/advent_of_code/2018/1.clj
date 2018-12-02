@@ -12,7 +12,7 @@
 (apply + values)
 
 ;; solve part two
-(let [seen (atom #{})]
+(let [seen (atom #{0})]
   (->> (cycle values)
        (reduce
         (fn [acc v]
@@ -23,7 +23,7 @@
                   freq)))))))
 
 ;; solve part two w/fewer lines
-(let [seen (atom #{})]
+(let [seen (atom #{0})]
   (->> (cycle values)
        (reductions +)
        (drop-while #(apply not= (swap-vals! seen conj %)))
@@ -36,4 +36,7 @@
                (if (seen n)
                  (reduced n)
                  (conj seen n)))
-             #{}))
+             #{0}))
+
+;; NOTE `seen` begins with 0 to handle "+1, -1 first reaches 0 twice" case
+;; in which zero is considered as the starting frequency
