@@ -10,14 +10,14 @@
 
 ;; solve part one
 (defn score-box-id [id]
-  (let [inv-freq (set/map-invert (frequencies id))]
+  (let [{has-2 2 has-3 3} (set/map-invert (frequencies id))]
     (cond
-      (and (find inv-freq 2) (find inv-freq 3)) :c
-      (find inv-freq 2) :a
-      (find inv-freq 3) :b)))
-(let [{:keys [a b c]} (->> lines (group-by score-box-id))]
-  (* (+ (count a) (count c))
-     (+ (count b) (count c))))
+      (and has-2 has-3) :both
+      has-2 :two
+      has-3 :three)))
+(let [{:keys [two three both]} (group-by score-box-id lines)]
+  (* (+ (count two) (count both))
+     (+ (count three) (count both))))
 
 ;; solve part two
 (defn diff-indices [a b]
