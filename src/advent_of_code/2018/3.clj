@@ -34,3 +34,36 @@
                       (:coords %)))
      (first)
      (:claim-id))
+
+
+(comment
+  "Render animated elven tapestry."
+  (require '[quil.middleware :as m]
+           '[quil.core :as q])
+
+  (defn draw-state [{:keys [claims]}]
+    (if-let [claim (first claims)]
+      (let [{:keys [x-offset y-offset width height color]} claim]
+        (apply q/fill (conj color 192))
+        (q/rect x-offset y-offset width height))
+      (q/no-loop)))
+
+  (def colors
+    (let [step (range 0 256 25)]
+      (for [r step g step b step]
+        [r g b])))
+
+  (defn setup []
+    (q/frame-rate 60)
+    (q/background 128)
+    {:claims (map #(assoc %1 :color %2) claims colors)})
+
+  (q/defsketch matrix
+    :title "No Matter How You Slice It"
+    :size [(apply max (map first (keys cloth)))
+           (apply max (map second (keys cloth)))]
+    :setup setup
+    :update #(update % :claims rest)
+    :draw draw-state
+    :features [:keep-on-top]
+    :middleware [m/fun-mode]))

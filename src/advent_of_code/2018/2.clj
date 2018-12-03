@@ -35,7 +35,6 @@
 
 (comment
   "Render animated visualization solving part two; probably buggy."
-
   (require '[quil.middleware :as m]
            '[quil.core :as q])
 
