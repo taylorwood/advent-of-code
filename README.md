@@ -7,7 +7,7 @@ Solutions to [Advent of Code](https://adventofcode.com) challenges.
 ## 2018
 
 - [Day One](src/advent_of_code/2018/1.clj)
-- [Day Two](src/advent_of_code/2018/2.clj)
+- [Day Two](src/advent_of_code/2018/2.clj) ([part two visualization with Quil](https://youtu.be/Y_UuASYf6bM))
 
 ## 2017
 

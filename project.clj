@@ -2,4 +2,5 @@
   :description "Advent of Code solutions"
   :url "https://blog.taylorwood.io"
   :dependencies [[org.clojure/clojure "1.9.0"]
-                 [org.clojure/math.combinatorics "0.1.4"]])
+                 [org.clojure/math.combinatorics "0.1.4"]
+                 [quil "2.8.0"]])
