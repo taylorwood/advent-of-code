@@ -11,6 +11,7 @@ Solutions to [Advent of Code](https://adventofcode.com) challenges.
 - [Day Three](src/advent_of_code/2018/3.clj)
 - [Day Four](src/advent_of_code/2018/4.clj)
 - [Day Five](src/advent_of_code/2018/5.clj)
+- [Day Six](src/advent_of_code/2018/6.clj)
 
 ## 2017
 
