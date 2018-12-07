@@ -38,8 +38,8 @@
 
 (comment
   "Render animated elven tapestry."
-  (require '[quil.middleware :as m]
-           '[quil.core :as q])
+  (require '[quil.core :as q]
+           '[quil.middleware :as m])
 
   (defn draw-state [{:keys [claims]}]
     (if-let [claim (first claims)]
@@ -50,12 +50,11 @@
 
   (def colors
     (let [step (range 0 256 25)]
-      (for [r step g step b step]
-        [r g b])))
+      (for [r step g step b step] [r g b])))
 
   (defn setup []
     (q/frame-rate 60)
-    (q/background 128)
+    (q/background 255)
     {:claims (map #(assoc %1 :color %2) claims colors)})
 
   (q/defsketch matrix
