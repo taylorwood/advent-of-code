@@ -6,13 +6,16 @@ Solutions to [Advent of Code](https://adventofcode.com) challenges.
 
 ## 2018
 
+This year I'm visualizing some of the solutions with [Quil](http://quil.info).
+
 - [Day One](src/advent_of_code/2018/1.clj)
-- [Day Two](src/advent_of_code/2018/2.clj) ([part two visualized with Quil](https://youtu.be/Y_UuASYf6bM))
-- [Day Three](src/advent_of_code/2018/3.clj) ([visualized with Quil](doc/img/2018/3.png))
-- [Day Four](src/advent_of_code/2018/4.clj) ([visualized with Quil](https://youtu.be/9OfLNCWM_yA))
+- [Day Two](src/advent_of_code/2018/2.clj) ([visualized](https://youtu.be/Y_UuASYf6bM))
+- [Day Three](src/advent_of_code/2018/3.clj) ([visualized](doc/img/2018/3.png))
+- [Day Four](src/advent_of_code/2018/4.clj) ([visualized](https://youtu.be/9OfLNCWM_yA))
 - [Day Five](src/advent_of_code/2018/5.clj)
-- [Day Six](src/advent_of_code/2018/6.clj) ([visualized with Quil](doc/img/2018/6.png))
+- [Day Six](src/advent_of_code/2018/6.clj) ([visualized](doc/img/2018/6.png))
 - [Day Seven](src/advent_of_code/2018/7.clj)
+- [Day Eight](src/advent_of_code/2018/8.clj)
 
 ## 2017
 
