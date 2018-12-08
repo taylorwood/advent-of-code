@@ -12,6 +12,7 @@ Solutions to [Advent of Code](https://adventofcode.com) challenges.
 - [Day Four](src/advent_of_code/2018/4.clj) ([visualized with Quil](https://youtu.be/9OfLNCWM_yA))
 - [Day Five](src/advent_of_code/2018/5.clj)
 - [Day Six](src/advent_of_code/2018/6.clj) ([visualized with Quil](doc/img/2018/6.png))
+- [Day Seven](src/advent_of_code/2018/7.clj)
 
 ## 2017
 

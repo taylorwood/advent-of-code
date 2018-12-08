@@ -1,5 +1,5 @@
 (ns advent-of-code.2018.4
-  (:require [advent-of-code.2018.3 :refer [update-keys]]
+  (:require [advent-of-code.elves :refer :all]
             [clj-time.core :as time]
             [clj-time.format :as timef]
             [clojure.string :as cs]
@@ -61,7 +61,7 @@
        (reduce-kv ;; aggregate per-guard sleep stats
         (fn [m guard {:keys [naps] :as sleep-data}]
           (assoc m guard (assoc sleep-data
-                           :sleep-minutes (mapcat interval->slept-minutes naps))))
+                                :sleep-minutes (mapcat interval->slept-minutes naps))))
         {})))
 
 ;; solve part one
@@ -76,11 +76,6 @@
            (key)
            (Integer/parseInt))]
   (* sleepiest-guard sleepiest-minute))
-
-(defn update-vals
-  "Returns m with all values applied to f with args."
-  [m f & args]
-  (persistent! (reduce-kv (fn [m k v] (assoc! m k (apply f v args))) (transient {}) m)))
 
 (def time->guard-freqs
   "Map from times to guard sleep frequencies."
@@ -99,7 +94,6 @@
       most-freq-guard (key (apply max-key second guard-freqs))]
   (* most-freq-guard (Integer/parseInt most-slept-minute)))
 
-
 (comment ;; viz
   (def naps
     "Map from guard IDs to maps of their sleep habits."
@@ -107,12 +101,12 @@
          (map parse-entry)
          (sort-by first) ;; make chronological
          (reduce ;; reduce sequential events into sleep data
-           (fn [[acc curr-guard nap-start] [timestamp [event new-guard]]]
-             (case event
-               :begin [acc new-guard]
-               :sleep [acc curr-guard timestamp]
-               :wake [(conj acc [curr-guard [nap-start timestamp]]) curr-guard]))
-           [[]])
+          (fn [[acc curr-guard nap-start] [timestamp [event new-guard]]]
+            (case event
+              :begin [acc new-guard]
+              :sleep [acc curr-guard timestamp]
+              :wake [(conj acc [curr-guard [nap-start timestamp]]) curr-guard]))
+          [[]])
          (first)))
 
   (require '[quil.core :as q]
@@ -158,17 +152,17 @@
           ;; draw clock
           (q/with-rotation [(* -1 q/HALF-PI)]
                            ;; highlight hot spots
-                           (q/push-style)
-                           (q/blend-mode :screen)
-                           (q/color-mode :hsb 1)
-                           (doseq [[minute-angle heat] hot-min-angles
-                                   :let [hsb (when min-heat
-                                               (q/map-range heat min-heat max-heat 1 0))]]
-                             (q/stroke hsb 0.9 1)
-                             (q/stroke-weight (max 1 (q/map-range heat min-heat max-heat 1 5)))
-                             (q/with-rotation [minute-angle]
-                                              (q/line 0 0 (q/map-range heat min-heat max-heat line-base-len (* 2 line-base-len)) 0)))
-                           (q/pop-style)
+            (q/push-style)
+            (q/blend-mode :screen)
+            (q/color-mode :hsb 1)
+            (doseq [[minute-angle heat] hot-min-angles
+                    :let [hsb (when min-heat
+                                (q/map-range heat min-heat max-heat 1 0))]]
+              (q/stroke hsb 0.9 1)
+              (q/stroke-weight (max 1 (q/map-range heat min-heat max-heat 1 5)))
+              (q/with-rotation [minute-angle]
+                (q/line 0 0 (q/map-range heat min-heat max-heat line-base-len (* 2 line-base-len)) 0)))
+            (q/pop-style)
             ;; fill minute arcs
             (q/fill r g b 128)
             (q/stroke r 128 b 100)
@@ -187,9 +181,9 @@
           colors (into {} (for [gid guard-ids]
                             [gid [(q/random 255) (q/random 255) (q/random 255)]]))
           [min-heat max-heat] (->> (mapcat
-                                     (fn [[_guard [start end] _rgb]]
-                                       (range (time/minute start) (inc (time/minute end))))
-                                     naps)
+                                    (fn [[_guard [start end] _rgb]]
+                                      (range (time/minute start) (inc (time/minute end))))
+                                    naps)
                                    (frequencies)
                                    (vals)
                                    (apply (juxt min max)))]
@@ -203,9 +197,9 @@
       [(rest events)
        [min-heat max-heat]
        (merge-with (fnil + 0)
-         hot-mins
-         (into {} (for [m (range (time/minute start) (inc (time/minute end)))]
-                    [m 1])))]))
+                   hot-mins
+                   (into {} (for [m (range (time/minute start) (inc (time/minute end)))]
+                              [m 1])))]))
 
   (q/defsketch clock
     :title "Nap Time"

@@ -25,10 +25,10 @@
 (def outliers ;; coordinates with infinite regions
   (let [[[_min-x max-x] [_min-y max-y]] coord-bounds]
     (->> (concat
-           (for [x (range max-x)] [x 0])
-           (for [y (range max-y)] [0 y])
-           (for [x (range max-x)] [x max-y])
-           (for [y (range max-y)] [max-x y]))
+          (for [x (range max-x)] [x 0])
+          (for [y (range max-y)] [0 y])
+          (for [x (range max-x)] [x max-y])
+          (for [y (range max-y)] [max-x y]))
          (map #(first (sort-by (partial dist %) coords)))
          (set))))
 
@@ -61,14 +61,14 @@
 
   (def cells-with-closest
     (pmap
-      (fn [cell]
-        (let [[closest next-closest] (sort-by (partial dist cell) coords)
-              tie? (= (dist cell closest) (dist cell next-closest))]
-          [cell (when-not tie? closest)]))
-      (let [[[min-x max-x] [min-y max-y]] coord-bounds]
-        (for [x (range (+ min-x max-x))
-              y (range (+ min-y max-y))]
-          [x y]))))
+     (fn [cell]
+       (let [[closest next-closest] (sort-by (partial dist cell) coords)
+             tie? (= (dist cell closest) (dist cell next-closest))]
+         [cell (when-not tie? closest)]))
+     (let [[[min-x max-x] [min-y max-y]] coord-bounds]
+       (for [x (range (+ min-x max-x))
+             y (range (+ min-y max-y))]
+         [x y]))))
 
   (def size
     [(apply max (map ffirst cells-with-closest))

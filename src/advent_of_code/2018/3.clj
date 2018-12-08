@@ -35,7 +35,6 @@
      (first)
      (:claim-id))
 
-
 (comment
   "Render animated elven tapestry."
   (require '[quil.core :as q]

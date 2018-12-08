@@ -32,7 +32,6 @@
    (str (subs l 0 (first diff))
         (subs l (inc (first diff))))))
 
-
 (comment
   "Render animated visualization solving part two; probably buggy."
   (require '[quil.middleware :as m]

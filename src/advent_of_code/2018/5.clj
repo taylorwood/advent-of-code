@@ -13,10 +13,10 @@
          right polymer]
     (if-let [[curr & rest] right]
       (recur
-        (if (some-> (peek left) (reactive? curr))
-          (pop left)
-          (conj left curr))
-        rest)
+       (if (some-> (peek left) (reactive? curr))
+         (pop left)
+         (conj left curr))
+       rest)
       (reverse left))))
 
 ;; solve part one
