@@ -1,10 +1,11 @@
 (ns advent-of-code.2018.8
   (:require [clojure.java.io :as io]
-            [clojure.string :as cs]))
+            [clojure.string :as cs]
+            [clojure.zip :as z]))
 
 (def input
   (->> (cs/split (slurp (io/resource "data_2018/8.txt")) #" ")
-       (map read-string)))
+       (mapv read-string)))
 
 (defn parse-tree [input]
   (letfn [(parse-node [[num-kids num-meta & more]]
@@ -28,6 +29,54 @@
      (mapcat :metadata)
      (apply +))
 
+;; solve part one (alternative)
+;; build tree w/zipper using non-recursive, stack-based approach
+;; adapted from https://www.reddit.com/r/adventofcode/comments/a47ubw/2018_day_8_solutions/ebc99t8/
+(defn interpret [input]
+  (loop [child-stack [(first input)]
+         meta-stack [(second input)]
+         i 2
+         children [[]]
+         meta [[]]
+         loc (z/seq-zip ())]
+    (if (seq child-stack)
+      (cond
+        (pos? (peek child-stack))
+        (recur
+         (-> child-stack
+             (update (dec (count child-stack)) dec)
+             (conj (nth input i)))
+         (conj meta-stack (nth input (inc i)))
+         (+ i 2)
+         (conj children [])
+         (conj meta [])
+         (-> loc (z/insert-child ()) z/down))
+
+        (pos? (peek meta-stack))
+        (recur
+         child-stack
+         (update meta-stack (dec (count child-stack)) dec)
+         (inc i)
+         children
+         (update meta (dec (count meta)) conj (nth input i))
+         loc)
+
+        :else
+        (let [m (peek meta)
+              children (pop children)]
+          (recur
+           (pop child-stack)
+           (pop meta-stack)
+           i
+           (update children (dec (count meta)) conj m)
+           (pop meta)
+           (do
+             (cond-> (z/insert-child loc m)
+               (some? (z/up loc)) z/up)))))
+      (z/root loc))))
+(apply + (flatten (interpret input)))
+
+;; solve part two
 (defn node->value [{:keys [child-nodes metadata]}]
   (if (seq child-nodes)
     (transduce
@@ -37,6 +86,4 @@
      +
      metadata)
     (apply + metadata)))
-
-;; solve part two
 (node->value parsed)
