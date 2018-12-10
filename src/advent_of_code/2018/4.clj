@@ -2,16 +2,11 @@
   (:require [advent-of-code.elves :refer :all]
             [clj-time.core :as time]
             [clj-time.format :as timef]
-            [clojure.string :as cs]
-            [clojure.java.io :as io]
             [instaparse.core :as p]
             [instaparse.transform :as pt])
   (:import (org.joda.time Interval)))
 
-(def lines
-  (->> (io/resource "data_2018/4.txt")
-       (slurp)
-       (cs/split-lines)))
+(def lines (day->input-lines 4))
 
 ;; parse inputs
 

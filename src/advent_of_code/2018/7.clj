@@ -1,12 +1,8 @@
 (ns advent-of-code.2018.7
-  (:require [advent-of-code.elves :refer :all]
-            [clojure.java.io :as io]
-            [clojure.string :as cs]))
+  (:require [advent-of-code.elves :refer :all]))
 
 (def lines
-  (->> (io/resource "data_2018/7.txt")
-       (slurp)
-       (cs/split-lines)
+  (->> (day->input-lines 7)
        (map #(rest (re-matches #".+\b([A-Z]+)\b.+\b([A-Z]+)\b.+" %)))))
 
 (def child->parents

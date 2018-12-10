@@ -1,11 +1,11 @@
 (ns advent-of-code.2018.8
-  (:require [clojure.java.io :as io]
+  (:require [advent-of-code.elves :refer :all]
             [clojure.string :as cs]
             [clojure.zip :as z]))
 
 (def input
-  (->> (cs/split (slurp (io/resource "data_2018/8.txt")) #" ")
-       (mapv read-string)))
+  (mapv read-string
+        (-> (day->input-lines 8) (first) (cs/split #" "))))
 
 (defn parse-tree [input]
   (letfn [(parse-node [[num-kids num-meta & more]]

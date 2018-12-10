@@ -1,6 +1,5 @@
 (ns advent-of-code.2018.3
-  (:require [clojure.java.io :as io]
-            [clojure.string :as cs]))
+  (:require [advent-of-code.elves :refer :all]))
 
 (defn claim->coords [{:keys [x-offset y-offset width height]}]
   (for [x (range x-offset (+ x-offset width))
@@ -8,9 +7,7 @@
     [x y]))
 
 (def claims
-  (->> (io/resource "data_2018/3.txt")
-       (slurp)
-       (cs/split-lines)
+  (->> (day->input-lines 3)
        (map #(->> (re-matches #"#(\d+) @ (\d+),(\d+): (\d+)x(\d+)" %)
                   (rest)
                   (map read-string)))

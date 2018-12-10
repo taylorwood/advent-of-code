@@ -1,11 +1,9 @@
 (ns advent-of-code.2018.6
-  (:require [clojure.java.io :as io]
+  (:require [advent-of-code.elves :refer :all]
             [clojure.string :as cs]))
 
 (def coords
-  (->> (io/resource "data_2018/6.txt")
-       (slurp)
-       (cs/split-lines)
+  (->> (day->input-lines 6)
        (map #(map read-string (cs/split % #", ")))))
 
 (defn dist* [[x1 y1] [x2 y2]]

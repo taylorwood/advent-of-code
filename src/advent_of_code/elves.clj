@@ -1,6 +1,15 @@
-(ns advent-of-code.elves)
+(ns advent-of-code.elves
+  (:require [clojure.java.io :as io]
+            [clojure.string :as cs]))
+
+(defn day->input-lines [day]
+  (->> (io/resource (format "data_2018/%s.txt" day))
+       (slurp)
+       (cs/split-lines)))
 
 (defn update-vals
   "Returns m with all values applied to f with args."
   [m f & args]
-  (persistent! (reduce-kv (fn [m k v] (assoc! m k (apply f v args))) (transient {}) m)))
+  (persistent! (reduce-kv #(assoc! %1 %2 (apply f %3 args))
+                          (transient {})
+                          m)))

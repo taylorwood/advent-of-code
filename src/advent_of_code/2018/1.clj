@@ -1,12 +1,7 @@
 (ns advent-of-code.2018.1
-  (:require [clojure.java.io :as io]
-            [clojure.string :as cs]))
+  (:require [advent-of-code.elves :refer :all]))
 
-(def values
-  (->> (io/resource "data_2018/1.txt")
-       (slurp)
-       (cs/split-lines)
-       (map read-string)))
+(def values (map read-string (day->input-lines 1)))
 
 ;; solve part one
 (apply + values)

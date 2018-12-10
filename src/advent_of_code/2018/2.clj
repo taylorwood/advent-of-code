@@ -1,13 +1,9 @@
 (ns advent-of-code.2018.2
-  (:require [clojure.java.io :as io]
+  (:require [advent-of-code.elves :refer :all]
             [clojure.set :as set]
-            [clojure.string :as cs]
             [clojure.math.combinatorics :as comb]))
 
-(def lines
-  (->> (io/resource "data_2018/2.txt")
-       (slurp)
-       (cs/split-lines)))
+(def lines (day->input-lines 2))
 
 ;; solve part one
 (defn score-box-id [id]

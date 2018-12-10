@@ -28,11 +28,11 @@
         (let [[new-marbles removed-marble new-pos]
               (special-marble circle curr-marble-idx)]
           (recur
-            (update scores (first players) + new-marble removed-marble)
-            (rest players)
-            new-marbles
-            new-pos
-            (inc new-marble)))
+           (update scores (first players) + new-marble removed-marble)
+           (rest players)
+           new-marbles
+           new-pos
+           (inc new-marble)))
         (let [[new-marbles new-pos]
               (place-marble circle new-marble curr-marble-idx)]
           (recur scores
