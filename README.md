@@ -17,6 +17,7 @@ This year I'm visualizing some of the solutions with [Quil](http://quil.info).
 - [Day Seven](src/advent_of_code/2018/7.clj)
 - [Day Eight](src/advent_of_code/2018/8.clj)
 - [Day Nine](src/advent_of_code/2018/9.clj)
+- [Day Ten](src/advent_of_code/2018/10.clj) ([visualized](https://youtu.be/4YtCXEalgTw))
 
 ## 2017
 
