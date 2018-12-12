@@ -13,3 +13,6 @@
   (persistent! (reduce-kv #(assoc! %1 %2 (apply f %3 args))
                           (transient {})
                           m)))
+
+(defn positions [pred coll]
+  (keep-indexed (fn [idx x] (when (pred x) idx)) coll))
