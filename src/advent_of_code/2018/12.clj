@@ -9,7 +9,7 @@
                      (cs/replace #"^initial state: " "")
                      (seq))]
     (->> pots-seq
-         (map-indexed (fn [i p] [i p]))
+         (map-indexed vector)
          (into {}))))
 
 (def patterns
@@ -25,23 +25,25 @@
 (defn apply-pattern [pattern nc prev-pots new-pots]
   (let [[prev-min prev-max] (apply (juxt min max) (keys prev-pots))]
     (reduce
-      (fn [new-pots offset]
-        (let []
-          (if (= pattern (get-pots-pattern prev-pots offset))
-            (assoc new-pots offset nc)
-            new-pots)))
-      new-pots
-      (range (dec prev-min) (+ 2 prev-max)))))
+     (fn [new-pots offset]
+       (if (= pattern (get-pots-pattern prev-pots offset))
+         (assoc new-pots offset nc)
+         new-pots))
+     new-pots
+     (range (dec prev-min) (+ 2 prev-max)))))
 
 (defn generate [pots]
   (reduce
-    (fn [new-pots [pattern output]]
-      (apply-pattern pattern output pots new-pots))
-    {}
-    patterns))
+   (fn [new-pots [pattern output]]
+     (apply-pattern pattern output pots new-pots))
+   {}
+   patterns))
 
 (defn score [generation]
-  (apply + (keys (reduce-kv (fn [m k v] (if (= \# v) (assoc m k v) m)) {} generation))))
+  (->> generation
+       (reduce-kv (fn [m k v] (if (= \# v) (assoc m k v) m)) {})
+       (keys)
+       (apply +)))
 
 (def generations (iterate generate init-pots))
 
@@ -49,7 +51,8 @@
 (score (nth generations 20))
 
 (defn pots->str [pots]
-  (cs/replace (cs/replace (apply str (map second (sort-by first pots))) #"^\.+" "") #"\.+$" ""))
+  (-> (apply str (map second (sort-by first pots)))
+      (cs/replace #"^\.+|\.+$" "")))
 
 (->> generations
      (map pots->str)

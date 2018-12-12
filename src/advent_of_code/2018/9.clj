@@ -8,7 +8,10 @@
       [(into (conj (subvec circle 0 pos) marble) (subvec circle pos))
        pos])))
 
-(defn special-marble [circle pos]
+(defn bonus-marble
+  "Updates circle when elf gets a bonus marble, returning a tuple of new
+  circle, the bonus marble, and the new circle position."
+  [circle pos]
   (let [size (count circle)
         remove-pos (->> (range size) (reverse) (cycle) (drop (- size pos)) (take 7) (last))]
     [(into (subvec circle 0 remove-pos) (subvec circle (inc remove-pos)))
@@ -23,24 +26,27 @@
          new-marble 1]
     (when (zero? (mod new-marble 100))
       (prn new-marble))
-    (if (<= new-marble marbles)
-      (if (zero? (mod new-marble 23))
-        (let [[new-marbles removed-marble new-pos]
-              (special-marble circle curr-marble-idx)]
-          (recur
-           (update scores (first players) + new-marble removed-marble)
-           (rest players)
-           new-marbles
-           new-pos
-           (inc new-marble)))
-        (let [[new-marbles new-pos]
-              (place-marble circle new-marble curr-marble-idx)]
-          (recur scores
-                 (rest players)
-                 new-marbles
-                 new-pos
-                 (inc new-marble))))
-      scores)))
+    (cond
+      (< marbles new-marble)
+      scores
+      (zero? (mod new-marble 23))
+      (let [[new-marbles bonus-marble new-pos]
+            (bonus-marble circle curr-marble-idx)]
+        (recur
+         (update scores (first players) + new-marble bonus-marble)
+         (rest players)
+         new-marbles
+         new-pos
+         (inc new-marble)))
+      :else
+      (let [[new-marbles new-pos]
+            (place-marble circle new-marble curr-marble-idx)]
+        (recur
+         scores
+         (rest players)
+         new-marbles
+         new-pos
+         (inc new-marble))))))
 
 (comment
   ;; solve part one, slowly
