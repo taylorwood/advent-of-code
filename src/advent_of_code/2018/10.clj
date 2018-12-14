@@ -68,7 +68,7 @@
       (q/ellipse (int x) (int y) size size))))
 
 ;; solve part one
-(q/defsketch clock
+(q/defsketch stars
   :title "The Stars Align"
   :size [1200 250]
   :setup setup

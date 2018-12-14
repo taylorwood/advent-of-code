@@ -81,19 +81,19 @@
   (let [sorted-carts (vec (sort-by (comp vec reverse :position) carts))]
     (reduce
      (fn [{:keys [carts] :as state} cart-index]
-       (let [{:keys [direction position] :as cart} (nth carts cart-index)]
-         (let [new-pos (next-position position direction)
-               cart (-> (get-in rows (reverse new-pos))
-                        (next-direction cart))]
-           (if-let [collide-index (->> carts
-                                       (positions #(and (not (:collided? %))
-                                                        (= (:position %) new-pos)))
-                                       (first))]
-             (-> state
-                 (assoc-in [:carts cart-index] (assoc cart :position new-pos :collided? true))
-                 (assoc-in [:carts collide-index] (assoc cart :position new-pos :collided? true))
-                 (update :collisions conj new-pos))
-             (assoc-in state [:carts cart-index] (assoc cart :position new-pos))))))
+       (let [{:keys [direction position] :as cart} (nth carts cart-index)
+             new-pos (next-position position direction)
+             cart (-> (get-in rows (reverse new-pos))
+                      (next-direction cart))]
+         (if-let [collide-index (->> carts
+                                     (positions #(and (not (:collided? %))
+                                                      (= (:position %) new-pos)))
+                                     (first))]
+           (-> state
+               (assoc-in [:carts cart-index] (assoc cart :position new-pos :collided? true))
+               (assoc-in [:carts collide-index] (assoc cart :position new-pos :collided? true))
+               (update :collisions conj new-pos))
+           (assoc-in state [:carts cart-index] (assoc cart :position new-pos)))))
      (assoc state :carts sorted-carts)
      (positions (comp not :collided?) sorted-carts))))
 
@@ -110,3 +110,45 @@
        (drop-while #(not= (count (filter :collided? (:carts %))) (dec (count (:carts %)))))
        (first)
        (:carts)))
+
+(comment
+  ;; viz
+  (require '[quil.core :as q]
+           '[quil.middleware :as m])
+
+  (defn setup []
+    (q/background 0)
+    (q/frame-rate 45)
+    init-state)
+
+  (def scale 4)
+
+  (defn draw-state [{:keys [carts rows]}]
+    (q/background 0)
+    (let [cells (apply concat
+                       (map-indexed (fn [y row]
+                                      (map-indexed (fn [x cell]
+                                                     [x y cell])
+                                                   row))
+                                    rows))
+          cells-by-type (group-by last cells)]
+      (doseq [[type cells] cells-by-type
+              :when (not= :empty type)]
+        (case type
+          (:diagonal-left :diagonal-right) (q/fill 92 0 0)
+          (:vertical :horizontal) (q/fill 192 0 0)
+          (:intersection) (q/fill 255 0 0))
+        (doseq [[x y] cells]
+          (q/rect (* scale x) (* scale y) scale scale)))
+      (q/fill 0 255 0)
+      (doseq [{:keys [position]} carts]
+        (q/ellipse (* scale (first position)) (* scale (second position)) 8 8))))
+
+  (q/defsketch tracks
+    :title "Mine Cart Madness"
+    :size [(* scale (apply max (map count (:rows init-state))))
+           (* scale (count (:rows init-state)))]
+    :setup setup
+    :draw draw-state
+    :update tick
+    :middleware [m/fun-mode]))
