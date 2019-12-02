@@ -4,6 +4,10 @@
 
 Solutions to [Advent of Code](https://adventofcode.com) challenges.
 
+## 2019
+
+- [Day One](src/advent_of_code/2019/1.clj)
+
 ## 2018
 
 This year I'm visualizing some of the solutions with [Quil](http://quil.info).
