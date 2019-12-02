@@ -7,7 +7,7 @@
     [x y]))
 
 (def claims
-  (->> (day->input-lines 3)
+  (->> (day->input-lines 2018 3)
        (map #(->> (re-matches #"#(\d+) @ (\d+),(\d+): (\d+)x(\d+)" %)
                   (rest)
                   (map read-string)))

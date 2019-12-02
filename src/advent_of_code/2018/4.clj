@@ -6,7 +6,7 @@
             [instaparse.transform :as pt])
   (:import (org.joda.time Interval)))
 
-(def lines (day->input-lines 4))
+(def lines (day->input-lines 2018 4))
 
 ;; parse inputs
 

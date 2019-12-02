@@ -3,7 +3,7 @@
             [clojure.set :as set]
             [clojure.math.combinatorics :as comb]))
 
-(def lines (day->input-lines 2))
+(def lines (day->input-lines 2018 2))
 
 ;; solve part one
 (defn score-box-id [id]

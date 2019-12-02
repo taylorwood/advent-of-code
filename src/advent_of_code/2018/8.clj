@@ -5,7 +5,7 @@
 
 (def input
   (mapv read-string
-        (-> (day->input-lines 8) (first) (cs/split #" "))))
+        (-> (day->input-lines 2018 8) (first) (cs/split #" "))))
 
 (defn parse-tree [input]
   (letfn [(parse-node [[num-kids num-meta & more]]

@@ -2,7 +2,7 @@
   (:require [advent-of-code.elves :refer :all]))
 
 (def lines
-  (->> (day->input-lines 7)
+  (->> (day->input-lines 2018 7)
        (map #(rest (re-matches #".+\b([A-Z]+)\b.+\b([A-Z]+)\b.+" %)))))
 
 (def child->parents

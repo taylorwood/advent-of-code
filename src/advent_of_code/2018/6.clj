@@ -3,7 +3,7 @@
             [clojure.string :as cs]))
 
 (def coords
-  (->> (day->input-lines 6)
+  (->> (day->input-lines 2018 6)
        (map #(map read-string (cs/split % #", ")))))
 
 (defn dist* [[x1 y1] [x2 y2]]

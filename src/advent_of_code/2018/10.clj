@@ -4,7 +4,7 @@
             [quil.middleware :as m]))
 
 (def input
-  (->> (day->input-lines 10)
+  (->> (day->input-lines 2018 10)
        (sequence
         (comp
          (map #(re-seq #"\-?\d+" %))

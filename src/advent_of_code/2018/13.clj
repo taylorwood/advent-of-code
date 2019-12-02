@@ -1,7 +1,7 @@
 (ns advent-of-code.2018.13
   (:require [advent-of-code.elves :refer :all]))
 
-(def lines (day->input-lines 13))
+(def lines (day->input-lines 2018 13))
 
 (def default-cart
   (with-meta {:position [0 0]}

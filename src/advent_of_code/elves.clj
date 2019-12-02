@@ -2,8 +2,8 @@
   (:require [clojure.java.io :as io]
             [clojure.string :as cs]))
 
-(defn day->input-lines [day]
-  (->> (io/resource (format "data_2018/%s.txt" day))
+(defn day->input-lines [year day]
+  (->> (io/resource (format "data_%s/%s.txt" year day))
        (slurp)
        (cs/split-lines)))
 

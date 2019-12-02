@@ -2,7 +2,7 @@
   (:require [advent-of-code.elves :refer :all]
             [clojure.string :as cs]))
 
-(def input (day->input-lines 12))
+(def input (day->input-lines 2018 12))
 
 (def init-pots
   (let [pots-seq (-> (first input)
