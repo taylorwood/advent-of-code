@@ -16,3 +16,10 @@
 
 (defn positions [pred coll]
   (keep-indexed (fn [idx x] (when (pred x) idx)) coll))
+
+(defn digits [n]
+  (loop [n n, ds ()]
+    (if (zero? n)
+      ds
+      (recur (quot n 10)
+             (cons (mod n 10) ds)))))

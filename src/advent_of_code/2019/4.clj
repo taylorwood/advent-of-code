@@ -1,13 +1,7 @@
-(ns advent-of-code.2019.4)
+(ns advent-of-code.2019.4
+  (:require [advent-of-code.elves :refer :all]))
 
 (def password-range (range 231832 (inc 767346)))
-
-(defn digits [n]
-  (loop [n n, ds ()]
-    (let [d (mod n 10)]
-      (if (pos? n)
-        (recur (quot n 10) (cons d ds))
-        ds))))
 
 (defn is-password? [n]
   (let [ds (digits n)]
