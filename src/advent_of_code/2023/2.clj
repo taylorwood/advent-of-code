@@ -6,12 +6,12 @@
   (let [sets (cs/split s #",\s+")]
     (into {} (for [set sets
                    :let [[num color] (cs/split set #" ")]]
-               [(keyword color) (read-string num)]))))
+               [(keyword color) (parse-long num)]))))
 
 (defn parse-line [s]
   (let [[game-pre subsets] (cs/split s #":\s+")
         subsets (cs/split subsets #";\s+")]
-    {:game (read-string (second (cs/split game-pre #" ")))
+    {:game (parse-long (second (cs/split game-pre #" ")))
      :subsets (for [sub subsets]
                 (subset->counts sub))}))
 

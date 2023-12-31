@@ -25,7 +25,7 @@
        (map-indexed
         (fn [i l]
           (for [m (indexed-matches l #"\d+")]
-            (assoc m :row i :number (read-string (:text m))))))
+            (assoc m :row i :number (parse-long (:text m))))))
        (apply concat)))
 
 (def bounded-numbers

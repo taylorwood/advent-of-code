@@ -4,7 +4,7 @@
             [clojure.zip :as z]))
 
 (def input
-  (mapv read-string
+  (mapv parse-long
         (-> (day->input-lines 2018 8) (first) (cs/split #" "))))
 
 (defn parse-tree [input]

@@ -1,7 +1,7 @@
 (ns advent-of-code.2018.1
   (:require [advent-of-code.elves :refer :all]))
 
-(def values (map read-string (day->input-lines 2018 1)))
+(def values (map parse-long (day->input-lines 2018 1)))
 
 ;; solve part one
 (apply + values)

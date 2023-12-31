@@ -2,7 +2,7 @@
   (:require [advent-of-code.elves :refer :all]))
 
 (def values
-  (mapv read-string (clojure.string/split (first (day->input-lines 2019 5)) #",")))
+  (mapv parse-long (clojure.string/split (first (day->input-lines 2019 5)) #",")))
 
 (def mode->get-fn
   {0 (fn [program pos] (program pos))

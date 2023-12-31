@@ -4,7 +4,7 @@
 
 (def coords
   (->> (day->input-lines 2018 6)
-       (map #(map read-string (cs/split % #", ")))))
+       (map #(map parse-long (cs/split % #", ")))))
 
 (defn dist* [[x1 y1] [x2 y2]]
   (+ (Math/abs ^Integer (- x1 x2))

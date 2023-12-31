@@ -1,7 +1,7 @@
 (ns advent-of-code.2019.1
   (:require [advent-of-code.elves :refer :all]))
 
-(def values (map read-string (day->input-lines 2019 1)))
+(def values (map parse-long (day->input-lines 2019 1)))
 
 ;; solve part one
 (defn mass->fuel [n]

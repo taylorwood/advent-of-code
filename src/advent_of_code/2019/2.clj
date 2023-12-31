@@ -3,7 +3,7 @@
             [clojure.string :refer [split]]))
 
 (def values
-  (mapv read-string (split (first (day->input-lines 2019 2)) #",")))
+  (mapv parse-long (split (first (day->input-lines 2019 2)) #",")))
 
 ;; solve part one
 (def op-codes

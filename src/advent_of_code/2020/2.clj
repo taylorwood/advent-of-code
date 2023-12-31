@@ -3,7 +3,7 @@
 
 (defn valid? [s]
   (let [[_ l h c p] (re-find #"^(\d+)-(\d+)\s([a-z]):\s([a-z]+)$" s)
-        l (read-string l) h (read-string h)]
+        l (parse-long l) h (parse-long h)]
     (<= l
         (count (filter #{c} (map str p)))
         h)))
@@ -14,7 +14,7 @@
 
 (defn valid-too? [s]
   (let [[_ l h c p] (re-find #"^(\d+)-(\d+)\s([a-z]):\s([a-z]+)$" s)
-        l (read-string l), h (read-string h)
+        l (parse-long l), h (parse-long h)
         a (str (nth p (dec l))), b (str (nth p (dec h)))]
     (and (not= a b)
          (or (= a c) (= b c)))))

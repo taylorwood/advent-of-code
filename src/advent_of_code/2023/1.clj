@@ -11,7 +11,7 @@
   (first-digit (clojure.string/reverse s)))
 
 (defn digit-combo [s]
-  (read-string (str (first-digit s) (last-digit s))))
+  (parse-long (str (first-digit s) (last-digit s))))
 
 ;; part 1 solution
 (apply + (map digit-combo (day->input-lines 2023 1)))
@@ -40,7 +40,7 @@
       (empty? s) acc
       
       (Character/isDigit (first s))
-      (recur (subs s 1) (conj acc (read-string (str (first s)))))
+      (recur (subs s 1) (conj acc (parse-long (str (first s)))))
 
       :else (if-let [n (string->digit s)]
               (recur (subs s 1) (conj acc n))
@@ -50,4 +50,4 @@
 (apply +
        (for [l (day->input-lines 2023 1)]
          (let [digits (parse-digits l)]
-           (read-string (str (first digits) (last digits))))))
+           (parse-long (str (first digits) (last digits))))))

@@ -2,17 +2,12 @@
   (:require [clojure.java.io :as io]
             [clojure.string :as cs]))
 
-(defn day->input-lines [year day]
+(defn day->input [year day]
   (->> (io/resource (format "data_%s/%s.txt" year day))
-       (slurp)
-       (cs/split-lines)))
+       (slurp)))
 
-(defn update-vals
-  "Returns m with all values applied to f with args."
-  [m f & args]
-  (persistent! (reduce-kv #(assoc! %1 %2 (apply f %3 args))
-                          (transient {})
-                          m)))
+(defn day->input-lines [year day]
+  (cs/split-lines (day->input year day)))
 
 (defn positions [pred coll]
   (keep-indexed (fn [idx x] (when (pred x) idx)) coll))

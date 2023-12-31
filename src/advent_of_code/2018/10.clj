@@ -8,7 +8,7 @@
        (sequence
         (comp
          (map #(re-seq #"\-?\d+" %))
-         (map #(map read-string %))
+         (map #(map parse-long %))
          (map #(zipmap [:x :y :vx :vy] %))
          (map #(assoc % :rgb (if (< 0.5 (rand)) [255 0 0] [0 255 0])))))))
 

@@ -10,7 +10,7 @@
   (->> (day->input-lines 2018 3)
        (map #(->> (re-matches #"#(\d+) @ (\d+),(\d+): (\d+)x(\d+)" %)
                   (rest)
-                  (map read-string)))
+                  (map parse-long)))
        (map #(zipmap [:claim-id :x-offset :y-offset :width :height] %))
        (map #(assoc % :coords (claim->coords %)))))
 
