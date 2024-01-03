@@ -36,3 +36,38 @@
         (destination seed ranges))
       seed
       maps)))
+
+;; work backwards from locations?
+;; model as range shifts; would normalizing the ranges help?
+
+(def seed-ranges
+  (map (fn [[m l]] [m (+ m l)])
+       (sort-by first (partition 2 seeds))))
+
+(def min-seed (apply min (map first seed-ranges)))
+(def max-seed (apply max (map #(apply + %) seed-ranges)))
+(- max-seed min-seed)
+
+(defn parse-map-line [s]
+  (let [[dest src len] (map parse-long (cs/split s #" "))]
+    [[src (+ src len)]
+     [dest (+ dest len)]]))
+
+(parse-map-line "0 50 50")
+
+(def maps
+  (for [[_ sect] parse-sections
+        :let [[title & nums] sect]]
+    {:name title
+     :ranges (sort-by second (map parse-map-line nums))}))
+
+(defn overlap? [[a b] [x y]]
+  (and (<= a y)
+       (>= b x)
+       [(max a x) (min b y)]))
+
+(defn test-overlap [m]
+  (for [[a b] (partition 2 1 (sort (map first (:ranges m))))]
+    (overlap? a b)))
+
+(sort-by second (:ranges (last maps)))
