@@ -36,3 +36,33 @@
         (destination seed ranges))
       seed
       maps)))
+
+(def seed-ranges
+  (map (fn [[m l]] [m (+ m l)])
+       (sort-by first (partition 2 seeds))))
+
+(defn intersect [[a b] [x y]]
+  (and (<= a y)
+       (>= b x)
+       [(max a x) (min b y)]))
+
+(defn intersect-shift [input-ranges map-ranges]
+  "Finds intersections between input ranges and output ranges, accounting
+  for shift in output ranges."
+  (for [range-in input-ranges
+        [out in len] map-ranges
+        :let [range-in' [in (+ in len)]
+              ov (intersect range-in range-in')]
+        :when ov
+        :let [shift (- in out)
+              range-out [(- (first ov) shift)
+                         (- (second ov) shift)]]]
+    range-out))
+
+;; part 2 solution
+(->> (reduce
+       intersect-shift
+       seed-ranges
+       (map :ranges maps))
+     (sort-by first)
+     (ffirst))
