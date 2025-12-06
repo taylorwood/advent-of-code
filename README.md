@@ -1,8 +1,22 @@
-<img src="doc/img/santa.jpg" align="right" width="450" />
-
 # Advent of Code
 
 Solutions to [Advent of Code](https://adventofcode.com) challenges.
+<img alt="Santa with laptop" src="doc/img/santa.jpg" style="width: 50%" />
+
+Solutions to [Advent of Code](https://adventofcode.com) challenges in Clojure.
+
+
+- [Day One](src/advent_of_code/2023/1.clj)
+- [Day Two](src/advent_of_code/2023/2.clj)
+- [Day Three](src/advent_of_code/2023/3.clj)
+- [Day Four](src/advent_of_code/2023/4.clj)
+- [Day Five](src/advent_of_code/2023/5.clj)
+
+## 2020
+
+- [Day One](src/advent_of_code/2020/1.clj)
+- [Day Two](src/advent_of_code/2020/2.clj)
+- [Day Three](src/advent_of_code/2020/3.clj)
 
 ## 2019
 
@@ -12,7 +26,6 @@ Solutions to [Advent of Code](https://adventofcode.com) challenges.
 - [Day Four](src/advent_of_code/2019/4.clj)
 - [Day Five](src/advent_of_code/2019/5.clj)
 - [Day Six](src/advent_of_code/2019/6.clj)
-- Sorry, I guess there were "better" things to do with my time
 
 ## 2018
 
