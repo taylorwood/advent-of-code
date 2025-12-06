@@ -1,10 +1,14 @@
 # Advent of Code
 
-Solutions to [Advent of Code](https://adventofcode.com) challenges.
 <img alt="Santa with laptop" src="doc/img/santa.jpg" style="width: 50%" />
 
 Solutions to [Advent of Code](https://adventofcode.com) challenges in Clojure.
 
+## 2025
+
+- [Day One](src/advent_of_code/2025/1.clj)
+
+## 2023
 
 - [Day One](src/advent_of_code/2023/1.clj)
 - [Day Two](src/advent_of_code/2023/2.clj)
