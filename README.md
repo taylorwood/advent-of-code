@@ -7,6 +7,7 @@ Solutions to [Advent of Code](https://adventofcode.com) challenges in Clojure.
 ## 2025
 
 - [Day One](src/advent_of_code/2025/1.clj)
+- [Day Two](src/advent_of_code/2025/2.clj)
 
 ## 2023
 
