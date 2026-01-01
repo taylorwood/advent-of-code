@@ -6,8 +6,7 @@
 
 (def coords
   (let [line->coords (fn [s] (mapv parse-long (cs/split s #",")))]
-    (mapv line->coords
-          (day->input-lines 2025 8))))
+    (mapv line->coords (day->input-lines 2025 8))))
 
 (defn distance [coords-a coords-b]
   (Math/sqrt (apply + (map (fn [a b] (Math/pow (- a b) 2)) coords-a coords-b))))
