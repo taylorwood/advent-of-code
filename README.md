@@ -15,6 +15,7 @@ Solutions to [Advent of Code](https://adventofcode.com) challenges in Clojure.
 - [Day Seven](src/advent_of_code/2025/7.clj)
 - [Day Eight](src/advent_of_code/2025/8.clj)
 - [Day Nine](src/advent_of_code/2025/9.clj)
+- [Day Ten](src/advent_of_code/2025/10.clj)
 
 ## 2023
 
